@@ -1,0 +1,9 @@
+<main class="feat-medicator-container">
+  <header class="feat-medicator-container__header">
+    <h1>Medicator</h1>
+  </header>
+  <section>
+    <app-ui-medicator-toolbar (addMedicationClick)="onAddMedicationClick()" (searchFieldValueChange)="tableSearchValue.set($event)" />
+    <app-ui-medicator-table [searchValue]="tableSearchValue()" [medications]="medicationsList$ | async" />
+  </section>
+</main>

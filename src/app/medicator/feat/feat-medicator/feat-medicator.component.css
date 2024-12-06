@@ -1,0 +1,9 @@
+.feat-medicator-container {
+  padding: 1rem;
+}
+
+.feat-medicator-container__header {
+  width: 100%;
+  display: flex;
+  justify-content: center;
+}
