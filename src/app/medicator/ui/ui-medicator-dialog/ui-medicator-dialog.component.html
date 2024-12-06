@@ -1,0 +1,128 @@
+<form class="ui-medicator-dialog-container" [formGroup]="addMedicationForm" (ngSubmit)="onAddMedication()">
+  <div class="ui-medicator-dialog-container__body">
+    <div class="ui-medicator-dialog-container--field">
+      <label for="name" class="font-semibold">Medication Name :</label>
+      <input pInputText id="name" class="flex-auto" formControlName="name" autocomplete="off" />
+      @if (addMedicationForm.get("name")?.dirty && addMedicationForm.get("name")?.touched && addMedicationForm.get("name")?.invalid) {
+        <small class="p-error">
+          @if (addMedicationForm.get("name")?.hasError("required")) {
+            <span>This Field is Required.</span>
+          }
+          @if (addMedicationForm.get("name")?.hasError("minlength")) {
+            <span>This field should be at least {{ addMedicationForm.get("name")?.errors?.["minlength"].requiredLength }} characters.</span>
+          }
+          @if (addMedicationForm.get("name")?.hasError("maxlength")) {
+            <span>This field should be {{ addMedicationForm.get("name")?.errors?.["maxlength"].requiredLength }} characters at most.</span>
+          }
+        </small>
+      }
+    </div>
+    <div class="ui-medicator-dialog-container--field-group">
+      <div class="ui-medicator-dialog-container--field">
+        <label for="dosage" class="font-semibold">Dosage :</label>
+        <p-inputNumber
+          class="flex-auto"
+          pKeyFilter="num"
+          [min]="0.01"
+          mode="decimal"
+          [maxFractionDigits]="2"
+          formControlName="dosage"
+          autocomplete="off" />
+        @if (
+          addMedicationForm.get("dosage")?.dirty && addMedicationForm.get("dosage")?.touched && addMedicationForm.get("dosage")?.invalid
+        ) {
+          <small class="p-error">
+            @if (addMedicationForm.get("dosage")?.hasError("required")) {
+              <span>This Field is Required.</span>
+            }
+            @if (addMedicationForm.get("dosage")?.hasError("min")) {
+              <span>This field's value should be no less than {{ addMedicationForm.get("dosage")?.errors?.["min"].min }}.</span>
+            }
+          </small>
+        }
+      </div>
+      <div class="ui-medicator-dialog-container--field">
+        <label for="unit" class="font-semibold">Unit :</label>
+        <p-dropdown
+          id="unit"
+          formControlName="unit"
+          [options]="unitsDropdown"
+          optionLabel="label"
+          optionValue="value"
+          placeholder="Select a Unit"
+          [style]="{ width: '100%' }" />
+        @if (addMedicationForm.get("unit")?.dirty && addMedicationForm.get("unit")?.touched && addMedicationForm.get("unit")?.invalid) {
+          <small class="p-error">
+            @if (addMedicationForm.get("unit")?.hasError("required")) {
+              <span>This Field is Required.</span>
+            }
+          </small>
+        }
+      </div>
+    </div>
+    <div class="ui-medicator-dialog-container--box">
+      <span class="ui-medicator-dialog-container--box-title">Frequency</span>
+      <div class="ui-medicator-dialog-container--field mt-1">
+        <label for="days" class="font-semibold">Days :</label>
+        <p-selectButton formControlName="days" [options]="weekDaysSelect" [multiple]="true" optionLabel="label" optionValue="value" />
+        @if (addMedicationForm.get("days")?.dirty && addMedicationForm.get("days")?.touched && addMedicationForm.get("days")?.invalid) {
+          <small class="p-error">
+            @if (addMedicationForm.get("days")?.hasError("required")) {
+              <span>Selecting at least on day is required.</span>
+            }
+          </small>
+        }
+      </div>
+      <div class="ui-medicator-dialog-container--field">
+        <label for="unit" class="font-semibold">Time :</label>
+        @for (time of timeControl.controls; let timeIndex = $index; track timeIndex) {
+          <div formArrayName="time">
+            <div class="ui-medicator-dialog-container--field-group">
+              <div class="ui-medicator-dialog-container--field ui-medicator-dialog-container--field-row" style="width: auto">
+                <p-calendar [formControlName]="timeIndex" [timeOnly]="true" />
+                @if (
+                  timeControl.controls[timeIndex].dirty &&
+                  timeControl.controls[timeIndex].touched &&
+                  timeControl.controls[timeIndex].invalid
+                ) {
+                  <small class="p-error">
+                    @if (timeControl.controls[timeIndex].hasError("required")) {
+                      <span>Selecting at least on day is required.</span>
+                    }
+                  </small>
+                }
+              </div>
+              @if (timeControl.controls.length > 1) {
+                <p-button
+                  icon="pi pi-times"
+                  [style]="{ marginTop: '-1rem' }"
+                  [rounded]="true"
+                  [text]="true"
+                  severity="danger"
+                  (onClick)="removeTime(timeIndex)" />
+              }
+            </div>
+          </div>
+        }
+        <small class="p-error">
+          @if (addMedicationForm.get("time")?.hasError("duplicateTimeValues")) {
+            <span>Time values should be unique.</span>
+          }
+        </small>
+
+        <p-button label="Add Time" [text]="true" icon="pi pi-plus" (onClick)="addTime()" />
+      </div>
+    </div>
+  </div>
+  <div class="ui-medicator-dialog-container__footer">
+    <button
+      pButton
+      pRipple
+      type="button"
+      label="Cancel"
+      icon="pi pi-times"
+      class="p-button-text p-button-danger"
+      (click)="dismissDialog()"></button>
+    <button pButton pRipple type="submit" label="Add" icon="pi pi-plus" class="p-button-success"></button>
+  </div>
+</form>

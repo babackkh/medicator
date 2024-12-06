@@ -1,0 +1,12 @@
+.p-icon-field	.p-inputtext {width: 100%;}
+
+.p-button-icon , .p-button-label {font-size: 14px}
+
+label {font-size: 12px}
+
+small {font-size: 10px}
+
+*:focus {
+    outline: none;
+    box-shadow: none;
+}

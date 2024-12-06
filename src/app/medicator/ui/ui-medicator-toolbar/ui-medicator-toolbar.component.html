@@ -1,0 +1,13 @@
+<div class="ui-medicator-toolbar-container">
+  <div class="ui-medicator-toolbar-container__searchfield ui-medicator-toolbar-container--min-width">
+    <p-iconField iconPosition="left">
+      <p-inputIcon styleClass="pi pi-search" />
+      <input type="text" pInputText placeholder="Search Added Medications..." [formControl]="searchFieldControl" />
+    </p-iconField>
+  </div>
+  <p-button
+    label="Add Medication"
+    icon="pi pi-plus"
+    styleClass="ui-medicator-toolbar-container--width-control"
+    (onClick)="addMedicationClick.emit()" />
+</div>

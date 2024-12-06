@@ -1,0 +1,23 @@
+<p-table [value]="medicationsList()" responsiveLayout="stack" [breakpoint]="'960px'" [tableStyle]="{ 'min-width': '50rem' }">
+  <ng-template pTemplate="header" let-columns>
+    <tr>
+      <th>Medication Name</th>
+      <th>Dosage</th>
+      <th>Frequency</th>
+      <th>Last Updated</th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-medication let-columns="columns">
+    <tr>
+      <td><span class="p-column-title">Medication Name</span>{{ medication.name }}</td>
+      <td><span class="p-column-title">Dosage</span>{{ medication.dosage }}</td>
+      <td><span class="p-column-title">Frequency</span>{{ medication.frequency }}</td>
+      <td><span class="p-column-title">Last Updated</span>{{ medication.lastUpdated | date: "medium" }}</td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="emptymessage">
+    <tr>
+      <td colspan="4" style="text-align: center">There are no medications in the list yet.</td>
+    </tr>
+  </ng-template>
+</p-table>

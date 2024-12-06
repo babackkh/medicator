@@ -1,0 +1,51 @@
+.ui-medicator-dialog-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.ui-medicator-dialog-container--field-group {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.ui-medicator-dialog-container--field {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 0.2rem;
+  margin-bottom: 1.8rem
+}
+
+.ui-medicator-dialog-container--field-row {
+  margin-bottom: 1rem;
+}
+
+.ui-medicator-dialog-container--box {
+  position: relative;
+  border: 1px solid #e5e7eb;
+  border-radius: 6px;
+  padding: 0.7rem;
+  margin-bottom: 1rem;
+}
+
+.ui-medicator-dialog-container--box-title {
+  position: absolute;
+  top: -10px;
+  background: #fff;
+  padding: 0 0.3rem;
+}
+
+.ui-medicator-dialog-container__footer {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 1rem;
+}
+
+.flex-auto {flex: 1 1 auto;}
+.font-semibold {font-weight: 500;}
+.mt-1 {margin-top: 1rem;}
+
